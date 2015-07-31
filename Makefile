@@ -5,6 +5,11 @@ FMT=xlsx xlsm xlsb misc full
 REQS=jszip.js
 ADDONS=dist/cpexcel.js
 
+compile:
+	echo "run npm install ..."
+	npm install
+	echo "finish npm install ..."
+
 $(TARGET): $(DEPS)
 	cat $^ | tr -d '\15\32' > $@
 
@@ -12,6 +17,8 @@ bits/01_version.js: package.json
 	echo "XLSX.version = '"`grep version package.json | awk '{gsub(/[^0-9a-z\.-]/,"",$$2); print $$2}'`"';" > $@
 
 .PHONY: clean
+
+
 clean:
 	rm -f $(TARGET)
 
